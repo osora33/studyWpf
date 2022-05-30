@@ -11,11 +11,5 @@ namespace WpfBasicApp
         {
             InitializeComponent();
         }
-
-        private void btnClick_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("Hello, WPF!!", "First WPF");
-            btnClick.Visibility = Visibility.Hidden;
-        }
     }
 }
