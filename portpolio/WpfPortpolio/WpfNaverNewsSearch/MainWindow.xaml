@@ -28,7 +28,7 @@
                  mah:TextBoxHelper.ClearTextButton="True"
                  KeyDown="txtSearch_KeyDown"/>
             <TextBlock Text="시작번호" VerticalAlignment="Center"/>
-            <TextBox x:Name="txtStartNum" Width="100" Margin="5" Text="1"
+            <TextBox x:Name="txtStartNum" Width="100" Margin="5" Text="1" VerticalAlignment="Center"
                      TextAlignment="Right"/>
         </StackPanel>
 

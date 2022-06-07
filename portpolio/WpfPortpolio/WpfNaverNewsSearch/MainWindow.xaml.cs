@@ -86,18 +86,16 @@ namespace WpfNaverNewsSearch
             var json_array = (JArray)items;
 
             List<NewsItem> newsItems = new List<NewsItem>();        //데이터그리드 연동
-
+            
             foreach (var item in json_array)
             {
                 var temp = DateTime.Parse(item["pubDate"].ToString());
                 NewsItem news = new NewsItem()
                 {
-                    Title = Regex.Replace(
-                    item["title"].ToString(), @"<(.|\n)*?>", string.Empty),
+                    Title = Regex.Replace(item["title"].ToString(), @"<(.|\n)*?>", string.Empty),
                     OriginalLink = item["originallink"].ToString(),
                     Link = item["link"].ToString(),
-                    Description = Regex.Replace(
-                    item["description"].ToString(), @"<(.|\n)*?>", string.Empty),
+                    Description = Regex.Replace(item["description"].ToString(), @"<(.|\n)*?>", string.Empty),
                     PubDate = temp.ToString("yyyy-MM-dd HH:mm")
                 };
 
