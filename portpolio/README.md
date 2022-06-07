@@ -33,4 +33,4 @@
 
 <br>
 
-![NaverNewsSearch](https://github.com/osora33/studyWpf/blob/main/capture/naver_newssearch.PNG)
+![NaverNewsSearch](https://github.com/osora33/studyWpf/blob/main/capture/naver_newssearch2.PNG)
