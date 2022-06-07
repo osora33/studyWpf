@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -91,10 +92,12 @@ namespace WpfNaverNewsSearch
                 var temp = DateTime.Parse(item["pubDate"].ToString());
                 NewsItem news = new NewsItem()
                 {
-                    Title = item["title"].ToString(),
+                    Title = Regex.Replace(
+                    item["title"].ToString(), @"<(.|\n)*?>", string.Empty),
                     OriginalLink = item["originallink"].ToString(),
                     Link = item["link"].ToString(),
-                    Description = item["description"].ToString(),
+                    Description = Regex.Replace(
+                    item["description"].ToString(), @"<(.|\n)*?>", string.Empty),
                     PubDate = temp.ToString("yyyy-MM-dd HH:mm")
                 };
 
