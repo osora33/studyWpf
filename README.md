@@ -17,11 +17,11 @@ C# WPF 학습리포지토리
 ## Day 3일차
  - 디자인
  - 리소스
- - 네이버 영화 앱 만들기([클릭](https://github.com/osora33/studyWpf/tree/main/portpolio))
+ - 네이버 영화 앱 만들기([클릭](https://github.com/osora33/studyWpf/tree/main/portpolio#naver-%EC%98%81%ED%99%94%EA%B2%80%EC%83%89))
 
 ## Day 4일차
- - 네이버 영화 앱 마무리([클릭](https://github.com/osora33/studyWpf/tree/main/portpolio))
- - 네이버 뉴스검색 앱
+ - 네이버 영화 앱 마무리([클릭](https://github.com/osora33/studyWpf/tree/main/portpolio#naver-%EC%98%81%ED%99%94%EA%B2%80%EC%83%89))
+ - 네이버 뉴스검색 앱([클릭](https://github.com/osora33/studyWpf/tree/main/portpolio#naver-%EB%89%B4%EC%8A%A4%EA%B2%80%EC%83%89))
 
 ## Day 5일차
  - MVVM 패턴 학습
@@ -32,7 +32,7 @@ C# WPF 학습리포지토리
  - SmartHome 앱
 
 ## Day 7일차
- - SmartHome 시스템 만들기
+ - SmartHome 시스템 만들기([클릭](https://github.com/osora33/studyWpf/tree/main/portpolio#smarthome-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81%EC%95%B1))
    - MQTT Publish 프로그램
    - MQTT Broker 프로그램
    - MQTT Monitoring 프로그램
