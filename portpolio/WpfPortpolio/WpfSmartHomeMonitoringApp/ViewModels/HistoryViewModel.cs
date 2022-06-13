@@ -1,5 +1,7 @@
 ﻿using Caliburn.Micro;
 using OxyPlot;
+using OxyPlot.Legends;
+using OxyPlot.Series;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -21,7 +23,8 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
         private string endDate;
         private string initEndDate;
         private int totalCount;
-        private PlotModel smartHomeModel;
+        //OxyPlot 220613, OSR SmartHomeModel -> historyModel 변경
+        private PlotModel historyModel;
 
         public HistoryViewModel()
         {
@@ -103,12 +106,12 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
                 NotifyOfPropertyChange(() => TotalCount);
             }
         }
-        public PlotModel SmartHomeModel
+        public PlotModel HistoryModel   //OxyPlot 220613, OSR SmartHomeModel -> historyModel 변경
         {
-            get => smartHomeModel; set
+            get => historyModel; set
             {
-                smartHomeModel = value;
-                NotifyOfPropertyChange(() => SmartHomeModel);
+                historyModel = value;
+                NotifyOfPropertyChange(() => HistoryModel);
             }
         }
 
@@ -131,7 +134,7 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
             TotalCount = 0;
             using (SqlConnection conn = new SqlConnection(Commons.CONNSTRING))
             {
-                string strQuery = "select Id, CurrTime, Temp, Humid from TblSmartHome "
+                string strQuery = "select Id, DevId, CurrTime, Temp, Humid from TblSmartHome "
                     + "where DevId = @DevId and CurrTime between @StartDate and @EndDate "
                     + "order by Id";
 
@@ -149,14 +152,55 @@ namespace WpfSmartHomeMonitoringApp.ViewModels
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     var i = 0;
+                    //start of chart process 220613 추가
+                    PlotModel tmp = new PlotModel()
+                    {
+                        Title = $"{SelectedDivision.DivisionVal} Histories",
+                        Subtitle = "using OxyPlot"
+                    };        //임시 플롯모델
+                    var l = new Legend()
+                    {
+                        LegendBorder = OxyColors.Black,
+                        LegendBackground = OxyColor.FromAColor(200, OxyColors.White),
+                        LegendPosition = LegendPosition.TopRight,
+                        LegendPlacement = LegendPlacement.Inside
+                    };
+                    tmp.Legends.Add(l);
+                    var seriesTemp = new LineSeries() 
+                    {
+                        Color = OxyColor.FromRgb(255,100,100),
+                        Title = "Temperature", 
+                        MarkerType = MarkerType.Circle,
+                        MarkerSize = 4
+                    };      //온도값을 라인차트로 담을 객체
+                    var seriesHumid = new LineSeries()
+                    {
+                        Color = OxyColor.FromRgb(150, 150, 255),
+                        Title = "Humidity",
+                        MarkerSize = 4,
+                        MarkerType = MarkerType.Triangle
+                    };
                     while (reader.Read())
                     {
-                        var temp = reader["Temp"];
+                        //지우는게 나음
+                        var model = new SmartHomeModel();
+                        model.DevId = reader["DevId"].ToString();
+                        model.CurrTime = DateTime.Parse(reader["CurrTime"].ToString());
+                        model.Temp = Convert.ToDouble(reader["Temp"]);
+                        model.Humid = Convert.ToDouble(reader["Humid"]);
+                        //var temp = reader["Temp"];
                         //Temp, Humid 차트데이터를 생성
+                        seriesTemp.Points.Add(new DataPoint(i, model.Temp));
+                        seriesHumid.Points.Add(new DataPoint(i, model.Humid));
 
                         i++;
                     }
                     TotalCount = i;
+
+                    tmp.Series.Add(seriesTemp);
+                    tmp.Series.Add(seriesHumid);
+                    HistoryModel = tmp;
+                    //end of chart process 220613 추가
                 }
                 catch (Exception ex)
                 {
