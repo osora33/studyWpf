@@ -38,10 +38,12 @@
 <br>
 
 ## SmartHome 모니터링앱
+[이전](https://github.com/osora33/studyWpf)
  - WPF(.NET Framework 4.7.2 / C#)
    - MahApps.Metro
    - Caliburn.Micro
    - LiveCharts
+   - OxyPlot.Wpf
    - M2Mqtt
    - Newtonsoft.Json
    - SQLServer DB
@@ -50,3 +52,9 @@
 
 ![SmartHomeMonitoring](https://github.com/osora33/studyWpf/blob/main/capture/SmartHomeMonitoring.PNG)
 DB모니터링 화면
+
+![RealTimeView](https://raw.githubusercontent.com/osora33/studyWpf/main/capture/RealTime.PNG)
+실시간 센서 디스플레이
+
+![HistoryView](https://raw.githubusercontent.com/osora33/studyWpf/main/capture/History.PNG)
+센서값 시각화 및 프로그램 정보창
